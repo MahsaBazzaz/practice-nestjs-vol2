@@ -16,12 +16,18 @@ export class ProductService{
         return this.products.slice();
     }
 
-    getAproduct(title:string):Product{
+    getAproduct(title:string){
         const product =  this.products.find((prod) => prod.title === title);
         if(!product){
             throw new NotFoundException('could not find product');
         }
         return { ...product};
+        
     }
-    
+    deleteProduct(title:string){
+        const index = this.products.findIndex((prod) => prod.title === title);
+        this.products.splice(index,index);
+        return index;
+    }
+
 }
